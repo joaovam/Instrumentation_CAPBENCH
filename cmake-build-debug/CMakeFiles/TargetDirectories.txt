@@ -1,0 +1,3 @@
+/home/joaovam/Documents/TCC/Instrumentation_CAPBENCH/cmake-build-debug/CMakeFiles/inst.dir
+/home/joaovam/Documents/TCC/Instrumentation_CAPBENCH/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/joaovam/Documents/TCC/Instrumentation_CAPBENCH/cmake-build-debug/CMakeFiles/rebuild_cache.dir
