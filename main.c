@@ -8,7 +8,7 @@
 #define L3_CACHE_MISS_INDEX 2
 
 int main() {
-    int events[NUM_EVENTS] = {PAPI_L1_DCM, PAPI_L2_DCM, PAPI_L3_TCM};
+    int events[NUM_EVENTS] = {PAPI_L1_TCM, PAPI_L2_TCM, PAPI_L3_TCM};
     int EventSet1 = PAPI_NULL;
     long long values[NUM_EVENTS];
     int ret;
