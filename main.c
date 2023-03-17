@@ -23,7 +23,7 @@ int main() {
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
             fprintf(stderr, "Event index %d could not be added", i);
-            exit(1);
+
         }
     }
 
