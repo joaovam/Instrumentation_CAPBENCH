@@ -11,7 +11,7 @@ int main() {
     int events[NUM_EVENTS] = {PAPI_L1_TCM, PAPI_L2_TCM, PAPI_L3_TCM};
     int EventSet1 = PAPI_NULL;
     long long values[NUM_EVENTS];
-    char err_string[PAPI_MAX_STR_LEN];
+    char *error_str;
     int ret;
 
     // Initialize PAPI
@@ -24,8 +24,8 @@ int main() {
     for (int i = 0; i< NUM_EVENTS; i++){
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
-            PAPI_error_string(PAPI_create_eventset(&EventSet1), err_string, PAPI_MAX_STR_LEN);
-            fprintf(stderr, "Event index %d could not be added. Cause: %s", i, err_string);
+            error_str = PAPI_strerror(ret);
+            fprintf(stderr, "Event index %d could not be added. Cause: %s", i, error_str);
 
         }
     }
