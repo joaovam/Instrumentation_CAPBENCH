@@ -21,11 +21,17 @@ int main() {
         fprintf(stderr, "PAPI library initialization error!\n");
         exit(1);
     }
+
+    if(PAPI_create_eventset(&EventSet1)!=PAPI_OK){
+        error_str = PAPI_strerror(ret);
+        fprintf(stderr, "Could not create event set: %s\n", error_str );
+    }
+
     for (int i = 0; i< NUM_EVENTS; i++){
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
             error_str = PAPI_strerror(ret);
-            fprintf(stderr, "Event index %d could not be added. Cause: %s", i, error_str);
+            fprintf(stderr, "Event index %d could not be added. Cause: %s\n", i, error_str);
 
         }
     }
