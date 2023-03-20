@@ -24,7 +24,7 @@ int main() {
     for (int i = 0; i< NUM_EVENTS; i++){
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
-            PAPI_error_string(PAPI_create_eventset(&event_set), err_string, PAPI_MAX_STR_LEN);
+            PAPI_error_string(PAPI_create_eventset(&EventSet1), err_string, PAPI_MAX_STR_LEN);
             fprintf(stderr, "Event index %d could not be added. Cause: %s", i, err_string);
 
         }
@@ -37,11 +37,11 @@ int main() {
         exit(1);
     }
 
-    for (i = 0; i < 100; i++)
+    for (int i = 0; i < 100; i++)
     {
-        for (j = 0; j < 100; j++)
+        for (int j = 0; j < 100; j++)
         {
-            for (k = 0; k < 100; k++)
+            for (int k = 0; k < 100; k++)
             {
                 /* Do some work */
             }
