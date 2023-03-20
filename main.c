@@ -11,18 +11,21 @@ int main() {
     int events[NUM_EVENTS] = {PAPI_L1_TCM, PAPI_L2_TCM, PAPI_L3_TCM};
     int EventSet1 = PAPI_NULL;
     long long values[NUM_EVENTS];
+    char err_string[PAPI_MAX_STR_LEN];
     int ret;
 
     // Initialize PAPI
     ret = PAPI_library_init(PAPI_VER_CURRENT);
     if (ret != PAPI_VER_CURRENT) {
+
         fprintf(stderr, "PAPI library initialization error!\n");
         exit(1);
     }
     for (int i = 0; i< NUM_EVENTS; i++){
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
-            fprintf(stderr, "Event index %d could not be added\n", i);
+            PAPI_error_string(PAPI_create_eventset(&event_set), err_string, PAPI_MAX_STR_LEN);
+            fprintf(stderr, "Event index %d could not be added. Cause: %s", i, err_string);
 
         }
     }
@@ -58,6 +61,8 @@ int main() {
     printf("L3 cache misses: %lld\n", values[L3_CACHE_MISS_INDEX]);
 
     // Cleanup PAPI
+    PAPI_cleanup_eventset(event_set);
+    PAPI_destroy_eventset(&event_set);
     PAPI_shutdown();
 
     return 0;
