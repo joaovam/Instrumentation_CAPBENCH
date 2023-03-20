@@ -22,7 +22,7 @@ int main() {
     for (int i = 0; i< NUM_EVENTS; i++){
         ret = PAPI_add_event(EventSet1, events[i]);
         if(ret != PAPI_OK) {
-            fprintf(stderr, "Event index %d could not be added", i);
+            fprintf(stderr, "Event index %d could not be added\n", i);
 
         }
     }
@@ -34,8 +34,16 @@ int main() {
         exit(1);
     }
 
-    // Code to measure cache misses
-    // ...
+    for (i = 0; i < 100; i++)
+    {
+        for (j = 0; j < 100; j++)
+        {
+            for (k = 0; k < 100; k++)
+            {
+                /* Do some work */
+            }
+        }
+    }
 
     // Stop counters
     ret = PAPI_stop(EventSet1, values);
