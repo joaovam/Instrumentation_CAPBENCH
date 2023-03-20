@@ -61,8 +61,8 @@ int main() {
     printf("L3 cache misses: %lld\n", values[L3_CACHE_MISS_INDEX]);
 
     // Cleanup PAPI
-    PAPI_cleanup_eventset(event_set);
-    PAPI_destroy_eventset(&event_set);
+    PAPI_cleanup_eventset(EventSet1);
+    PAPI_destroy_eventset(&EventSet1);
     PAPI_shutdown();
 
     return 0;
