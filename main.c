@@ -7,7 +7,7 @@
 #define L2_CACHE_MISS_INDEX 1
 #define L3_CACHE_MISS_INDEX 2
 
-int main() {
+int main(int argc, char ** argv) {
     int events[NUM_EVENTS] = {PAPI_L1_TCM, PAPI_L2_TCM, PAPI_L3_TCM};
     int EventSet1 = PAPI_NULL;
     long long values[NUM_EVENTS];
@@ -21,7 +21,10 @@ int main() {
         fprintf(stderr, "PAPI library initialization error!\n");
         exit(1);
     }
-
+    if( argc < 2){
+        fprintf(stderr, "Program to be run is missing. Enter it as an argument.\n");
+        exit(1);
+    }
     if(PAPI_create_eventset(&EventSet1)!=PAPI_OK){
         error_str = PAPI_strerror(ret);
         fprintf(stderr, "Could not create event set: %s\n", error_str );
@@ -53,7 +56,7 @@ int main() {
             }
         }
     }
-
+    system(argv[1]);
     // Stop counters
     ret = PAPI_stop(EventSet1, values);
     if (ret != PAPI_OK) {
@@ -62,9 +65,9 @@ int main() {
     }
 
     // Print results
-    printf("L1 cache misses: %lld\n", values[L1_CACHE_MISS_INDEX]);
-    printf("L2 cache misses: %lld\n", values[L2_CACHE_MISS_INDEX]);
-    printf("L3 cache misses: %lld\n", values[L3_CACHE_MISS_INDEX]);
+    printf("L1 cache miss rate: %f\n", (double) values[L1_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
+    printf("L2 cache miss rate: %f\n", (double) values[L2_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
+    printf("L3 cache miss rate: %f\n", (double) values[L3_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
 
     // Cleanup PAPI
     PAPI_cleanup_eventset(EventSet1);
