@@ -67,11 +67,11 @@ int main(int argc, char ** argv) {
     }
 
     // Print results
-    printf("L1 cache miss rate: %f\n", (double) values[L1_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
-    printf("L2 cache miss rate: %f\n", (double) values[L2_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
-    printf("L3 cache miss rate: %f\n", (double) values[L3_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] * PAPI_L1_TCH));
-    printf("Total number of cycles: %lld", values[TOTAL_CYCLES_INDEX]);
-    printf("Total number of cycles: %lld", values[TOTAL_INSTRUCTIONS_INDEX]);
+    printf("L1 cache miss rate: %f\n", (double) values[L1_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] + PAPI_L1_TCH));
+    printf("L2 cache miss rate: %f\n", (double) values[L2_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] + PAPI_L1_TCH));
+    printf("L3 cache miss rate: %f\n", (double) values[L3_CACHE_MISS_INDEX]/(double) (values[L1_CACHE_MISS_INDEX] + PAPI_L1_TCH));
+    printf("Total number of cycles: %lld\n", values[TOTAL_CYCLES_INDEX]);
+    printf("Total number of cycles: %lld\n", values[TOTAL_INSTRUCTIONS_INDEX]);
 
     // Cleanup PAPI
     PAPI_cleanup_eventset(EventSet1);

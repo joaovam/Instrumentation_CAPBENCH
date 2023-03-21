@@ -1,0 +1,2 @@
+gcc main.c -L/home/joao.vieira/papi/src -lpapi -o inst
+sudo LD_LIBRARY_PATH=$LD_LIBRARY_PATH ./inst ../CAPBenchmarks/x86/bin/fast.intel
